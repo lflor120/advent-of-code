@@ -16,8 +16,8 @@ func main() {
 	}
 
 	reports := getReports(string(fileContents))
-
-
+	safeReports := getSafeReports(reports)
+	fmt.Printf("Solution one: %d \n", safeReports)
 }
 
 func getReports(fileContents string) [][]int {
@@ -58,4 +58,15 @@ func isSafe(slice []int) bool {
 	monotonic := isIncreasing(slice) || isDecreasing(slice)
 	diff := validDifference(slice)
 	return monotonic && diff
+}
+
+func getSafeReports(reports [][]int) int {
+	// gets the number of safe reports
+	safeReports := 0
+	for _, report := range reports {
+		if isSafe(report) {
+			safeReports++
+		}
+	}
+	return safeReports
 }
