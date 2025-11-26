@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"log"
-	"strings"
-	"strconv"
-	"sort"
 	"math"
+	"os"
+	"sort"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 
 	lines := strings.Split(string(file), "\n")
 	firstSlice, secondSlice := convertToSortedIntSlice(lines)
-	
+
 	solutionOne := getDistances(firstSlice, secondSlice)
 	fmt.Printf("Solution one: %d \n", solutionOne)
 
@@ -39,7 +39,7 @@ func convertToSortedIntSlice(lines []string) ([]int, []int) {
 		}
 
 		secondNum, err := strconv.Atoi(nums[1])
-				if err != nil {
+		if err != nil {
 			log.Fatalf("Failed to proccess second number: %v", err)
 		}
 
@@ -55,7 +55,7 @@ func getDistances(firstSlice []int, secondSlice []int) int {
 	distance := 0
 
 	for index := range len(firstSlice) {
-		distance += int(math.Abs(float64(firstSlice[index]) - float64(secondSlice[index]) ))
+		distance += int(math.Abs(float64(firstSlice[index]) - float64(secondSlice[index])))
 	}
 	return distance
 }
