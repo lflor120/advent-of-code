@@ -42,10 +42,20 @@ func getReports(fileContents string) [][]int {
 }
 
 func isIncreasing(slice []int) bool {
+	for i := range len(slice) - 1 {
+		if slice[i] > slice[i + 1] {
+			return false
+		}
+	}
 	return true
 }
 
 func isDecreasing(slice []int) bool {
+	for i := range len(slice) - 1 {
+		if slice[i] < slice[i + 1] {
+			return false
+		}
+	}
 	return true
 }
 
