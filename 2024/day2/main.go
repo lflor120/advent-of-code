@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -19,8 +21,23 @@ func main() {
 }
 
 func getReports(fileContents string) [][]int {
+	// converts input.txt to a 2D array of ints
 	reports := make([][]int, 0)
 
+	lines := strings.Split(fileContents, "\n")
+	for _, line := range lines {
+		levelsString := strings.Fields(line)
+		levels := make([]int, 0)
+		for _, level := range levelsString {
+			num, err := strconv.Atoi(level)
+			if err != nil {
+				log.Fatalf("Failed to convert %d to an int. err: %v", num, err)
+			}
+			levels = append(levels, num)
+		}
+
+		reports = append(reports, levels)
+	}
 	return reports
 }
 
