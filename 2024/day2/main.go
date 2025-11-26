@@ -1,13 +1,27 @@
 package main
- import (
+
+import (
 	"fmt"
+	"log"
 	"os"
- )
+)
 
 func main() {
 	fmt.Println("Day 2!")
+	fileContents, err := os.ReadFile("input.txt")
+	if err != nil {
+		log.Fatalf("Error reading file: %v", err)
+	}
+
+	reports := getReports(string(fileContents))
 
 
+}
+
+func getReports(fileContents string) [][]int {
+	reports := make([][]int, 0)
+
+	return reports
 }
 
 func isIncreasing(slice []int) bool {
