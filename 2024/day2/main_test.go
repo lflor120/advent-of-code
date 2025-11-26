@@ -40,7 +40,7 @@ func TestDecreasingFalse(t *testing.T) {
 
 func TestDifferenceHappy(t *testing.T) {
 	test := []int{1,3,5}
-	result := validDifference(test)
+	result := validDifference(test, 0)
 
 	if result != true {
 		t.Error("valid difference failed happy path")
@@ -49,7 +49,7 @@ func TestDifferenceHappy(t *testing.T) {
 
 func TestDifferenceSad(t *testing.T) {
 	test := []int{1,5,10}
-	result := validDifference(test)
+	result := validDifference(test, 0)
 
 	if result != false {
 		t.Error("valid difference failed sad path")
