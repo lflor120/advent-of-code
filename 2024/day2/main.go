@@ -60,20 +60,21 @@ func isDecreasing(slice []int) bool {
 	return true
 }
 
-func validDifference(slice []int) bool {
+func validDifference(slice []int, tolerance int) bool {
 	// returns whether adjacent elements differ by at least one and at most three
+	badLevels := 0
 	for i := range len(slice) - 1 {
 		diff := int(math.Abs(float64(slice[i]) - float64(slice[i + 1])))
 		if diff < 1 || diff > 3 {
-			return false
+			badLevels++
 		}
 	}
-	return true
+	return badLevels <= tolerance
 }
 
 func isSafe(slice []int) bool {
 	monotonic := isIncreasing(slice) || isDecreasing(slice)
-	diff := validDifference(slice)
+	diff := validDifference(slice, 0)
 	return monotonic && diff
 }
 
