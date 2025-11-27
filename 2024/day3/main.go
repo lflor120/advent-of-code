@@ -15,12 +15,12 @@ func main() {
 		log.Fatalf("Failed to read input file")
 	}
 
-	validMuls := getAllMuls(string(fileContents))
-	fmt.Println(validMuls)
+	answerOne := calculateMuls(string(fileContents))
+	fmt.Printf("Solution one: %d", answerOne)
 }
 
 func getAllMuls(memory string) []string {
-	regex := `mul\(\d{0,3},\d{0,3}\)`
+	regex := `mul\(\d{1,3},\d{1,3}\)`
 	re, err := regexp.Compile(regex)
 	if err != nil {
 		log.Fatalf("Failed to compile regex: %v", err)
@@ -30,7 +30,7 @@ func getAllMuls(memory string) []string {
 }
 
 func getMulOperands(mul string) (int, int) {
-	regex := `\d{0,3},\d{0,3}`
+	regex := `\d{1,3},\d{1,3}`
 	re, err := regexp.Compile(regex)
 	if err != nil {
 		log.Fatalf("Failed to compile operand regex: %v", err)
@@ -49,4 +49,15 @@ func getMulOperands(mul string) (int, int) {
 	}
 
 	return numOne, numTwo
+}
+
+func calculateMuls(memory string) int {
+	answer := 0
+
+	mulOperations := getAllMuls(memory)
+	for _, mul := range mulOperations {
+		numOne, numTwo := getMulOperands(mul)
+		answer += (numOne * numTwo)
+	}
+	return answer
 }
