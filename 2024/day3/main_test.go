@@ -1,8 +1,9 @@
 package main
 
 import (
-	"testing"
+	"log"
 	"slices"
+	"testing"
 )
 
 func TestGetMuls(t *testing.T) {
@@ -21,6 +22,20 @@ func TestGetMuls(t *testing.T) {
 
 	if !slices.Equal(expected, muls) {
 		t.Errorf("Mul output is incorrect\nExpected: %v\nResult: %v", expected, muls)
+	}
+
+}
+
+func TestParseOperands(t *testing.T) {
+	mul := "mul(123,65)"
+	resultOne, resultTwo := getMulOperands(mul)
+
+	if resultOne != 123 {
+		log.Fatalf("getMulOperands was expected: 123 but got %v", resultOne)
+	}
+
+	if resultTwo != 65 {
+		log.Fatalf("getMulOperands was expected: 65 but got %v", resultTwo)
 	}
 
 }
