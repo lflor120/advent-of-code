@@ -19,6 +19,9 @@ func main() {
 	reports := getReports(string(fileContents))
 	safeReports := getSafeReports(reports)
 	fmt.Printf("Solution one: %d \n", safeReports)
+
+	dampenedReports := getSafeReportsDampened(reports)
+	fmt.Printf("Solution two: %d \n", dampenedReports)
 }
 
 func getReports(fileContents string) [][]int {
@@ -76,6 +79,31 @@ func isSafe(slice []int) bool {
 	monotonic := isIncreasing(slice) || isDecreasing(slice)
 	diff := validDifference(slice, 0)
 	return monotonic && diff
+}
+
+func isSafeDampened(slice []int) bool {
+	if isSafe(slice) {
+		return true
+	}
+
+	for i := range len(slice) {
+		permutationSlice := append([]int{}, slice[:i]...)
+		permutationSlice = append(permutationSlice, slice[i + 1:]...)
+		if isSafe(permutationSlice) {
+			return true
+		}
+	}
+	return false
+}
+
+func getSafeReportsDampened(reports [][]int) int {
+	safeReports := 0
+	for _, report := range reports {
+		if isSafeDampened(report) {
+			safeReports++
+		}
+	}
+	return safeReports
 }
 
 func getSafeReports(reports [][]int) int {
