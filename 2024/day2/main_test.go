@@ -55,3 +55,39 @@ func TestDifferenceSad(t *testing.T) {
 		t.Error("valid difference failed sad path")
 	}
 }
+
+func TestIsSafeHappyPath(t *testing.T) {
+	test := []int{1,2,3,6,8}
+	result := isSafe(test)
+
+	if result != true {
+		t.Error("IsSafe failed in happy path")
+	}
+}
+
+func TestIsSafeSad(t *testing.T) {
+	test := []int{1,2,3,6,10,}
+	result := isSafe(test)
+
+	if result != false {
+		t.Error("IsSafe failed in sad path")
+	}	
+}
+
+func TestIsSafeHappyDampenedPath(t *testing.T) {
+	test := []int{8, 6, 4, 4, 1}
+	result := isSafeDampened(test)
+
+	if result != true {
+		t.Error("IsSafeDampened failed in happy path")
+	}
+}
+
+func TestIsSafeDampenedSad(t *testing.T) {
+	test := []int{9, 7, 6, 2, 1}
+	result := isSafeDampened(test)
+
+	if result != false {
+		t.Error("IsSafeDampened failed in sad path")
+	}	
+}
