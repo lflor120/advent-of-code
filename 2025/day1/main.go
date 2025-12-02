@@ -53,6 +53,7 @@ func (c *CircularLL) getPasscode(instructions []string) int {
 				zeros++
 			}
 		}
+		// this was for part one
 		// if c.current.value == 0 {
 		// 	zeros++
 		// }
