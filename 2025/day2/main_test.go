@@ -10,3 +10,21 @@ func TestIsRepeatedHappy(t *testing.T) {
 		t.Error("isRepeated failed happy path")
 	}
 }
+
+func TestIsRepeatedEvenLength(t *testing.T) {
+	test := 11
+	result := isRepeatedNumber(test)
+
+	if result != true {
+		t.Error("isRepeated failed for even length string")
+	}
+}
+
+func TestIsRepeatedEvenLength2(t *testing.T) {
+	test := 1010
+	result := isRepeatedNumber(test)
+
+	if result != true {
+		t.Error("isRepeated failed for even length string")
+	}
+}

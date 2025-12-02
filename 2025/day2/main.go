@@ -10,7 +10,6 @@ import (
 
 // thought process: this one is gonna be ugly, 
 // I'm thinking loop through each range and use string parsing to see if numbers are repeated
-
 func main() {
 	fmt.Println("Day 2 2025!")
 	file, err := os.ReadFile("input.txt")
@@ -19,8 +18,8 @@ func main() {
 	}
 
 	ranges := processFile(string(file))
-
-	fmt.Println(ranges)
+	solutionOne := getAllInvalidIds(ranges)
+	fmt.Printf("Solution one: %d", solutionOne)
 }
 
 func processFile(fileContents string) [][]int {
@@ -46,5 +45,36 @@ func processFile(fileContents string) [][]int {
 func isRepeatedNumber(num int) bool {
 	numStr := strconv.Itoa(num)
 	halfway := len(numStr) / 2
-	return numStr[:halfway] != numStr[halfway+1:]
+	return numStr[:halfway] == numStr[halfway:] && (len(numStr) % 2 == 0)
 }
+
+func getInvalidIdsInRange(start, stop int) []int {
+	invalidIds := make([]int, 0)
+	for i := start; i <= stop; i++ {
+		if isRepeatedNumber(i) {
+			invalidIds = append(invalidIds, i)
+		}
+	}
+	return invalidIds
+}
+
+func getAllInvalidIds(ranges [][]int) int {
+	total := 0
+
+	for _, idRange := range ranges {
+		start, stop := idRange[0], idRange[1]
+		invalidIds := getInvalidIdsInRange(start, stop)
+		total += sum(invalidIds)
+	}
+	return total
+}
+
+func sum(array []int) int {
+	total := 0
+	for _, num := range array {
+		total += num
+	}
+	return total
+}
+
+
