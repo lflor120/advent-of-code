@@ -8,6 +8,9 @@ import (
 	"strconv"
 )
 
+// thought process: this one is gonna be ugly, 
+// I'm thinking loop through each range and use string parsing to see if numbers are repeated
+
 func main() {
 	fmt.Println("Day 2 2025!")
 	file, err := os.ReadFile("input.txt")
@@ -38,4 +41,10 @@ func processFile(fileContents string) [][]int {
 		ranges = append(ranges, []int{numOne, numTwo})
 	}
 	return ranges
+}
+
+func isRepeatedNumber(num int) bool {
+	numStr := strconv.Itoa(num)
+	halfway := len(numStr) / 2
+	return numStr[:halfway] != numStr[halfway+1:]
 }
