@@ -52,13 +52,10 @@ func part2BruteForce(num int) bool {
 	numStr := strconv.Itoa(num)
 
 	for j := 0; j < len(numStr); j++ {
-		// check if repeated length checks out
 		window := numStr[:j]
-		// fmt.Println(window)
 		transformed := strings.ReplaceAll(numStr, window, "")
 
 		if transformed == "" && len(window) != len(numStr) && strings.Count(numStr, window) > 1 {
-			// fmt.Println("valid!: ", numStr, window)
 			return true
 		}
 	}
