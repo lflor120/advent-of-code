@@ -20,6 +20,12 @@ type MatrixTest struct {
 	matrix, expected [][]string
 }
 
+type OperationTest struct {
+	name, operation string
+	slice []int
+	expected int
+}
+
 func TestTransposeMatrix(t *testing.T) {
 	cases := []MatrixTest{
 		{
@@ -75,11 +81,36 @@ func TestGetEquation(t *testing.T) {
 		t.Run(fmt.Sprintf("%v using operation %s", tc.slice, tc.operation), func(t *testing.T) {
 			resultSlice, resultOp := getEquation(tc.slice)
 			if !slices.Equal(resultSlice, tc.expectedSlice) {
-				log.Fatalf("Got: %v Expected: %v", resultSlice, tc.expectedSlice)
+				log.Fatalf("Got: %v Expected: %v\n", resultSlice, tc.expectedSlice)
 			}
 
 			if resultOp != tc.expectedOp {
-				log.Fatalf("Got: %v Expected: %v", resultOp, tc.expectedOp)
+				log.Fatalf("Got: %v Expected: %v\n", resultOp, tc.expectedOp)
+			}
+		})
+	}
+}
+
+func TestOperations(t *testing.T) {
+	cases := []OperationTest{
+		{
+			name: "Aoc Example Multiply",
+			operation: "*",
+			slice: []int{123, 45, 6},
+			expected: 33210,
+		},
+		{
+			name: "Aoc Example Plus",
+			operation: "+",
+			slice: []int{328, 64, 98},
+			expected: 490,
+		},
+	}
+	for _, tc := range cases {
+		t.Run(fmt.Sprintf("Test case: %v", tc.name), func(t *testing.T) {
+			result := operations[tc.operation](tc.slice)
+			if result != tc.expected {
+				log.Fatalf("Operations failed for test: %v\nExpected: %d Got %d\n",tc.name, tc.expected, result)
 			}
 		})
 	}
