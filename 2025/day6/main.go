@@ -22,9 +22,10 @@ var operations = map[string]func([]int) int {
 		return total
 	},
 	"*": func(slice []int) int {
-		total := 0
+		total := 1
 		for _, number := range slice {
 			total *= number
+
 		}
 		return total
 	},
@@ -39,6 +40,7 @@ func main() {
 
 	matrix := getStringMatrix(string(file))
 	transposedMatrix := getTransposeMatrix(matrix)
+	fmt.Println(transposedMatrix)
 	solutionOne := Calculate(transposedMatrix)
 	fmt.Printf("Solution one: %d\n", solutionOne)
 
@@ -92,7 +94,9 @@ func Calculate(matrix [][]string) int {
 	total := 0
 	for _, row := range matrix {
 		rowSlice, operation := getEquation(row)
-		total += operations[operation](rowSlice)
+		result := operations[operation](rowSlice)
+		fmt.Printf("Current answer: %d\n", result)
+		total += result
 	}
 	return total
 }
